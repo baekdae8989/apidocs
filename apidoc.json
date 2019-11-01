@@ -1,6 +1,5 @@
 {
-  "name": "WELIVEON Ver2",
-  "version": "0.0.0",
-  "description": "RESTFUL API Docs",
-  "url" : "http://localhost:1337"
+  "name": "WELIVEON VER.2",
+  "version": "0.1.0",
+  "url" : "http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/"
 }
