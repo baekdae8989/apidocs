@@ -35,7 +35,7 @@
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- 참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/custom/home_myclass?username=baek_dae@naver.com
+ 참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/custom/home_myclass?username=baek_dae@naver.com
  *
  */
 /**
@@ -49,7 +49,7 @@
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- 참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/custom/home_myquizset?username=baek_dae@naver.com
+ 참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/custom/home_myquizset?username=baek_dae@naver.com
  *
  */
 /**
@@ -63,7 +63,7 @@
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/custom/qna_shuffle/VyDeHHotW
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/custom/qna_shuffle/VyDeHHotW
  *
  */
 
@@ -184,11 +184,11 @@
  * @apiSuccessExample Success-Response:
  *     case : id Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/qna/VyogUToFZ
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/qna/VyogUToFZ
  *
  *     case : id not Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/qna?mysession_id=VyDeHHotW&page=1&limit=12&order=favor
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/qna?mysession_id=VyDeHHotW&page=1&limit=12&order=favor
  */
 
 /**
@@ -267,11 +267,11 @@
  * @apiSuccessExample Success-Response:
  *     case : id Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/qnacomment/ByWYWjtnHH
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/qnacomment/ByWYWjtnHH
  *
  *     case : id not Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/qnacomment?qna_id=B1KhTXFTQ
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/qnacomment?qna_id=B1KhTXFTQ
  */
 
 /**
@@ -347,11 +347,11 @@
  * @apiSuccessExample Success-Response:
  *     case : id Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/qnalike/j2yJdbhym
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/qnalike/j2yJdbhym
  *
  *     case : id not Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/qnalike?qna_id=heelwow
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/qnalike?qna_id=heelwow
  */
 
 /**
@@ -429,11 +429,11 @@
  * @apiSuccessExample Success-Response:
  *     case : id Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/classroom/ry112JaHS
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/classroom/ry112JaHS
  *
  *     case : id not Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/classroom?username=baek_dae@naver.com&page=1&limit=10&order=created_desc
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/classroom?username=baek_dae@naver.com&page=1&limit=10&order=created_desc
  */
 
 /**
@@ -600,11 +600,11 @@
  * @apiSuccessExample Success-Response:
  *     case : id Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/paper/r1BRl4rkLS
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/paper/r1BRl4rkLS
  *
  *     case : id not Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/paper?classroom_id=rJfd7VB1UB
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/paper?classroom_id=rJfd7VB1UB
  */
 
 /**
@@ -686,11 +686,11 @@
  * @apiSuccessExample Success-Response:
  *     case : id Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/item/rykg2VNH1LS
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/item/rykg2VNH1LS
  *
  *     case : id not Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/item?paper_id=H1znNNByIB
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/item?paper_id=H1znNNByIB
  */
 
 /**
@@ -800,11 +800,11 @@
  * @apiSuccessExample Success-Response:
  *     case : id Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/itemdetail/r1YZn4VSJUS
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/itemdetail/r1YZn4VSJUS
  *
  *     case : id not Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/api/v1/itemdetail?item_id=rykg2VNH1LS
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/itemdetail?item_id=rykg2VNH1LS
  */
 
 /**
