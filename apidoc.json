@@ -1,5 +1,5 @@
 {
   "name": "WELIVEON VER.2",
   "version": "0.1.0",
-  "url" : "http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com/"
+  "url" : "http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/"
 }
