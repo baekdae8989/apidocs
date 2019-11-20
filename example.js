@@ -53,19 +53,20 @@
  *
  */
 /**
- * @api {get} api/v1/custom/qna_shuffle/{mysession_id} GET QnaShuffle
+ * @api {get} api/v1/custom/qna_shuffle/{paper_id} GET QnaShuffle
  * @apiName QnaShuffle
  * @apiGroup Custom
  * @apiUse ApiHeaderAuthorization
  * @apiDescription Q&A 랜덤하게 하나 가져오는 API
  *
- * @apiParam {String} mysession_id [QueryString] mysession_id
+ * @apiParam {String} paper_id [QueryString] paper_id
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/custom/qna_shuffle/VyDeHHotW
  *
  */
+
 
 
 /**
@@ -122,6 +123,9 @@
  * @apiGroup File
  * @apiUse ApiHeaderAuthorization
  * @apiDescription zip 방식은 파일 그대로 업로드, pdf 방식은 pdf 이미지를 base64 방식으로 변환하여 전달하여야 함.
+ * 1. 서버 업로드 -> zip 방식은 unzip, pdf 방식은 이미지 변환
+ * 2. AWS 업로드 -> unzip, 이미지 변환 파일 AWS S3 업로드 후 클라이언트에 response
+ * 3. 서버에 남아 있던 파일 삭제. (비동기)
  *
  * @apiParam {String} flag [QueryParams]'pdf' || 'zip' (둘중 다른 텍스트가 넘어올 경우 joi로 err처리)
  * @apiParam {Object} file [payload] share file object
@@ -165,14 +169,14 @@
 
 
 /**
- * @api {get} api/v1/classroom/{id?}?mysession_id=?&order=?&limit=?&page=?&text=?&like_count=?&comment_count=? 1. GET : Qna Select
+ * @api {get} api/v1/classroom/{id?}?paper_id=?&order=?&limit=?&page=?&text=?&like_count=?&comment_count=? 1. GET : Qna Select
  * @apiName QnaSelect
  * @apiGroup Qna
  * @apiUse ApiHeaderAuthorization
- * @apiDescription QueryParams의 id 값이 넘어오지 않을 경우만 QueryString -> mysession_id, order, limit, page 필수 조건 체크 함.
+ * @apiDescription QueryParams의 id 값이 넘어오지 않을 경우만 QueryString -> paper_id, order, limit, page 필수 조건 체크 함.
  *
  * @apiParam {String} [id]              [QueryParams] id(primary key) / id가 넘어올 경우 특정 Qna 리턴, 그렇지 않으면 Qna list 리턴
- * @apiParam {String} mysession_id      [QueryString] mysession_id
+ * @apiParam {String} paper_id      [QueryString] paper_id
  * @apiParam {String} order             [QueryString] 'favor' || 'recently' (둘중 다른 텍스트가 넘어올 경우 joi로 err처리)
  * @apiParam {String} limit             [QueryString] 한 페이지에 보여질 Qna 수
  * @apiParam {String} page              [QueryString] 현재 페이지 수
@@ -188,7 +192,7 @@
  *
  *     case : id not Exist
  *     HTTP/1.1 200 OK
- *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/qna?mysession_id=VyDeHHotW&page=1&limit=12&order=favor
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/qna?paper_id=VyDeHHotW&page=1&limit=12&order=favor
  */
 
 /**
@@ -199,7 +203,7 @@
  *
  * @apiParam {String} writer                [payload] writer
  * @apiParam {String} text                  [payload] text
- * @apiParam {String} mysession_id          [payload] 참고하는 qna 세션 id
+ * @apiParam {String} paper_id          [payload] 참고하는 qna 세션 id
  * @apiParam {Number} secret                [payload] null or 1 ( null = 공개, 1 = 익명)
  *
  *
@@ -209,7 +213,7 @@
     "id": "f151afc9-19c3-452b-9b5e-68eb76a30923",
     "secret": 1,
     "writer": "백대선",
-    "mysession_id": "VyDeHHotW",
+    "paper_id": "VyDeHHotW",
     "text": "안녕하십니",
     "updatedAt": "2019-11-01T09:03:11.615Z",
     "createdAt": "2019-11-01T09:17:18.228Z"
@@ -226,7 +230,7 @@
  * @apiParam {String} id                      [QueryParams] 변경할 qna id
  * @apiParam {String} [writer]                [payload] writer
  * @apiParam {String} [text]                  [payload] text
- * @apiParam {String} [mysession_id]          [payload] 참고하는 qna 세션 id
+ * @apiParam {String} [paper_id]          [payload] 참고하는 qna 세션 id
  * @apiParam {Number} [secret]                [payload] null or 1 ( null = 공개, 1 = 익명)
  *
  *
@@ -567,23 +571,21 @@
  }
  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * @api {get} api/v1/classroom/copy/{id} 5. Get : Classroom Copy
+ * @apiName ClassroomCopy
+ * @apiGroup Classroom
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 복사할 classroom id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "status": "success"
+ }
+ */
 
 
 /**
@@ -674,6 +676,46 @@
  */
 
 /**
+ * @api {get} api/v1/paper/update_index/{classroom_id}/{current_id}/{current_index}/{change_index} 5. GET : Paper Update Index
+ * @apiName PaperUpdateIndex
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription paper set 간 드래그&드롭으로 위치가 변경될 때 실행되는 api
+ *
+ * @apiParam {String} classroom_id                      [QueryParams] classroom_id
+ * @apiParam {String} current_id                      [QueryParams] 현재 index의 id(primary key)
+ * @apiParam {String} current_index                      [QueryParams] 현재 index
+ * @apiParam {String} change_index                      [QueryParams] 변경될 index
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "status": "success"
+ }
+ */
+
+/**
+ * @api {get} api/v1/paper/{id} 6. GET : Paper Copy
+ * @apiName PaperCopy
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 복사할 paper id
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "status": "success"
+ }
+ */
+
+
+
+/**
  * @api {get} api/v1/item/{id?}?paper_id=? 1. GET : Item Select
  * @apiName ItemSelect
  * @apiGroup Item
@@ -715,7 +757,7 @@
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
-{
+ {
     "id": "48b78229-c105-4c28-953c-614c37159724",
     "title": "1번문제",
     "deco": "Q",
@@ -780,11 +822,46 @@
  }
  */
 
+/**
+ * @api {get} api/v1/item/update_index/{paper_id}/{current_id}/{current_index}/{change_index} 5. GET : Item Update Index
+ * @apiName ItemUpdateIndex
+ * @apiGroup Item
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription Item 간 드래그&드롭으로 위치가 변경될 때 실행되는 api
+ *
+ * @apiParam {String} paper_id                      [QueryParams] paper_id
+ * @apiParam {String} current_id                      [QueryParams] 현재 index의 id(primary key)
+ * @apiParam {String} current_index                      [QueryParams] 현재 index
+ * @apiParam {String} change_index                      [QueryParams] 변경될 index
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "status": "success"
+ }
+ */
 
-
-
-
-
+/**
+ * @api {get} api/v1/item/copy/{id}/{flag} 6. GET : Item Copy
+ * @apiName ItemCopy
+ * @apiGroup Item
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription Item copy (문항 복사) / 현재는 Quiz, Poll, Survey 만 복사 가능
+ * Quiz와 Poll,Survey 복사 조건이 다르므로 flag를 QueryPrams에 보내줘야 함.
+ *
+ * @apiParam {String} id                      [QueryParams] 복사할 item id
+ * @apiParam {String} flag                      [QueryParams] quiz || poll || survey
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "status": "success"
+ }
+ */
 
 
 /**
@@ -817,18 +894,20 @@
  * @apiParam {Number} index                [payload] index
  * @apiParam {String} item_id                [payload] 참고하는 item_id
  * @apiParam {Number} point                [payload] 문항별 리커트 점수
+ * @apiParam {String} image                [payload] 이미지 문항인 경우  ex) {"type":"image","target":"https://weliveon2.s3.ap-northeast-2.amazonaws.com/S4VGehNE/1.png"}
  *
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  {
-    "id": "ce9056ee-e38b-4bd2-b6c0-90d10ddbbc89",
-    "title": "1번복기",
-    "index": 13,
+    "id": "d25cc0a4-6347-4891-9810-37e59ca00702",
+    "image": "{\"type\":\"image\",\"target\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/S4VGehNE/1.png\"}",
+    "title": "hello",
+    "index": 1,
     "item_id": "rykg2VNH1LS",
     "point": 3,
-    "updatedAt": "2019-11-01T12:21:14.798Z",
-    "createdAt": "2019-11-01T12:21:14.798Z"
+    "updatedAt": "2019-11-06T01:56:09.964Z",
+    "createdAt": "2019-11-06T01:56:09.964Z"
 }
  */
 
@@ -861,6 +940,81 @@
  * @apiUse ApiHeaderAuthorization
  *
  * @apiParam {String} id                      [QueryParams] 삭제할 itemdetail id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "count": 1
+ }
+ */
+
+
+
+
+
+
+/**
+ * @api {get} api/v1/shorten/{id} 1. GET : Shorten Select
+ * @apiName ShortenSelect
+ * @apiGroup Shorten
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id              [QueryParams] id(primary key)
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     참고 : http://ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337/api/v1/shorten/1300
+ */
+
+/**
+ * @api {post} api/v1/shorten 2. POST : Shorten Insert
+ * @apiName ShortenInsert
+ * @apiGroup Shorten
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} long_url                [payload] long_url
+ * @apiParam {String} short_url                [payload] short_url
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "id": 2585,
+    "long_url": "http://weliveon.net/u/main/start/16abda6e-5e48-4327-b15d-bbbd3bae9b92",
+    "short_url": "16abda6e-5e48-4327-b15d-bbbd3bae9b92",
+    "updatedAt": "2019-11-01T09:44:58.788Z",
+    "createdAt": "2019-11-01T09:44:58.788Z"
+}
+ */
+
+/**
+ * @api {put} api/v1/shorten/{id} 3. PUT : Shorten Update
+ * @apiName ShortenUpdate
+ * @apiGroup Shorten
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription payload의 값이 수정될 object
+ *
+ * @apiParam {String} id                      [QueryParams] 변경할 shorten id
+ * @apiParam {String} [long_url]                [payload] long_url
+ * @apiParam {String} [short_url]                [payload] short_url
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "count": 1
+ }
+ */
+
+/**
+ * @api {delete} api/v1/shorten/{id} 4. DELETE : Shorten Delete
+ * @apiName ShortenDelete
+ * @apiGroup Shorten
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 삭제할 shorten id
  *
  *
  * @apiSuccessExample Success-Response:

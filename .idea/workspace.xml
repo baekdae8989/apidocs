@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="412b9726-0580-4322-86fd-36e4b3e281af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apidoc.json" beforeDir="false" afterPath="$PROJECT_DIR$/apidoc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example.js" beforeDir="false" afterPath="$PROJECT_DIR$/example.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="652">
-              <caret line="863" column="2" lean-forward="true" selection-start-line="863" selection-start-column="2" selection-end-line="863" selection-end-column="2" />
+            <state relative-caret-position="352">
+              <caret line="962" column="24" selection-start-line="962" selection-start-column="24" selection-end-line="962" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -29,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apidoc.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="3" column="72" selection-start-line="3" selection-start-column="72" selection-end-line="3" selection-end-column="72" />
+            <state relative-caret-position="88">
+              <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -39,26 +38,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>title</find>
-      <find>des</find>
-      <find>example</find>
-      <find>ap</find>
-      <find>api/admin/</find>
-      <find>apiheader</find>
-      <find>from_where</find>
-      <find>group</find>
-      <find>apiDescription</find>
-      <find>HTTP/1.1 200 OK</find>
-      <find>/ADMIN</find>
-      <find>presi</find>
-      <find>/admin</find>
-      <find>presign</find>
-      <find>param</find>
-      <find>AwsFileDelete</find>
-      <find>joi로</find>
-      <find>aws s3 file</find>
-      <find>qna</find>
-      <find>int</find>
       <find>[</find>
       <find>desc</find>
       <find>/</find>
@@ -69,11 +48,33 @@
       <find>writer</find>
       <find>wr</find>
       <find>write</find>
+      <find>/ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com</find>
+      <find>ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com</find>
+      <find>itemdetail</find>
+      <find>s3.</find>
+      <find>UpdateIndex</find>
+      <find>api/v1/paper</find>
+      <find>zip 방식은</find>
+      <find>paper</find>
+      <find>api/v1/item</find>
+      <find>5. get</find>
+      <find>prim</find>
+      <find>mysession_id</find>
+      <find>itemcopy</find>
+      <find>custom</find>
+      <find>classroom</find>
+      <find>&quot;status&quot;:</find>
+      <find>copy</find>
+      <find>item/co</find>
+      <find>updateindex</find>
+      <find>qnalike</find>
     </findStrings>
     <replaceStrings>
       <replace>/v1</replace>
       <replace>api</replace>
       <replace>writer</replace>
+      <replace>ec2-54-180-89-73.ap-northeast-2.compute.amazonaws.com:1337</replace>
+      <replace>paper_id</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -89,10 +90,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="716" />
+    <option name="y" value="185" />
+    <option name="width" value="1038" />
+    <option name="height" value="742" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -116,7 +117,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../restful_api_server" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -153,11 +154,32 @@
       <workItem from="1570665662584" duration="1206000" />
       <workItem from="1571187444968" duration="4756000" />
       <workItem from="1572589547514" duration="16551000" />
+      <workItem from="1572825999476" duration="1692000" />
+      <workItem from="1572913464370" duration="1361000" />
+      <workItem from="1572998225845" duration="6166000" />
+      <workItem from="1573187399645" duration="2576000" />
+      <workItem from="1573196616594" duration="125000" />
+      <workItem from="1574210067576" duration="2991000" />
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1572826200209</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1572826200209</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1">
+      <created>1572826326939</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1572826326939</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41448000" />
+    <option name="totallyTimeSpent" value="56359000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -185,6 +207,10 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/_apidoc.json" />
     <entry file="file://$PROJECT_DIR$/_apidoc.js" />
@@ -203,17 +229,17 @@
     <entry file="file://$PROJECT_DIR$/doc/img/favicon.ico">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/apidoc.json">
+    <entry file="file://$PROJECT_DIR$/example.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="72" selection-start-line="3" selection-start-column="72" selection-end-line="3" selection-end-column="72" />
+        <state relative-caret-position="352">
+          <caret line="962" column="24" selection-start-line="962" selection-start-column="24" selection-end-line="962" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example.js">
+    <entry file="file://$PROJECT_DIR$/apidoc.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
-          <caret line="863" column="2" lean-forward="true" selection-start-line="863" selection-start-column="2" selection-end-line="863" selection-end-column="2" />
+        <state relative-caret-position="88">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
         </state>
       </provider>
     </entry>
