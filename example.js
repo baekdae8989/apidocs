@@ -1000,7 +1000,7 @@ HTTP/1.1 200 OK
  * @api {post} api/v1/shorten 2. POST : Shorten Insert
  * @apiName ShortenInsert
  * @apiGroup Shorten
- * @apiUse ApiHeaderAuthorizatio
+ * @apiUse ApiHeaderAuthorization
  *
  * @apiParam {String} long_url                [payload] long_url
  * @apiParam {String} short_url                [payload] short_url
