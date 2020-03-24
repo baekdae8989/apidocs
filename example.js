@@ -719,6 +719,21 @@ HTTP/1.1 200 OK
 }
  */
 
+/**
+ * @api {get} api/v1/paper/join/{classroom_id} 6. GET : Paper > Item > Itemdetail join
+ * @apiName PaperJoin
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] classroom_id
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/paper?classroom_id=64bb138b-e585-4f84-9a72-54ce3e8f30b3
+*/
+
 
 
 
@@ -817,6 +832,9 @@ HTTP/1.1 200 OK
  */
 
 
+
+
+// Qnacomment 관련 API
 /**
  * @api {get} api/v1/qnacomment/{id?}?qna_id=? 1. GET : Qnacomment Select
  * @apiName QnacommentSelect
@@ -897,6 +915,7 @@ HTTP/1.1 200 OK
  */
 
 
+ // Qnalike 관련 API
 /**
  * @api {get} api/v1/qnalike/{id?}?qna_id=? 1. GET : Qnalike Select
  * @apiName QnalikeSelect
@@ -981,7 +1000,7 @@ HTTP/1.1 200 OK
 
 
 
-
+// Shorten 관련 API
 /**
  * @api {get} api/v1/shorten/{id} 1. GET : Shorten Select
  * @apiName ShortenSelect
