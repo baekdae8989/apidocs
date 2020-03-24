@@ -24,11 +24,11 @@
  * @apiSuccessExample Success-Response:
 case : id Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/classroom/16771ba8-21f0-4560-a4d5-e9d887e535cd
+참고 : http://apidoc.weliveon.net/api/v1/classroom/16771ba8-21f0-4560-a4d5-e9d887e535cd
  *
 case : id not Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/classroom?username=baek_dae@naver.com&page=1&limit=10&order=created_desc
+참고 : http://apidoc.weliveon.net/api/v1/classroom?username=baek_dae@naver.com&page=1&limit=10&order=created_desc
  */
 
 /**
@@ -182,7 +182,7 @@ HTTP/1.1 200 OK
  *
  * @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/custom/home_myclass?username=baek_dae@naver.com
+참고 : http://apidoc.weliveon.net/api/v1/custom/home_myclass?username=baek_dae@naver.com
  *
  */
 /**
@@ -196,7 +196,7 @@ HTTP/1.1 200 OK
  *
  * @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/custom/home_myquizset?username=baek_dae@naver.com
+참고 : http://apidoc.weliveon.net/api/v1/custom/home_myquizset?username=baek_dae@naver.com
  *
  */
 /**
@@ -210,7 +210,7 @@ HTTP/1.1 200 OK
  *
  * @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/custom/qna_shuffle/VyDeHHotW
+참고 : http://apidoc.weliveon.net/api/v1/custom/qna_shuffle/VyDeHHotW
  *
  */
 
@@ -335,11 +335,11 @@ HTTP/1.1 200 OK
  * @apiSuccessExample Success-Response:
 case : id Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/item/d6fc7fb3-95dc-4779-9636-76d6ccde3c35
+참고 : http://apidoc.weliveon.net/api/v1/item/d6fc7fb3-95dc-4779-9636-76d6ccde3c35
  *
 case : id not Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/item?paper_id=61a754b4-fb18-4c25-9396-ea4ab5973c90
+참고 : http://apidoc.weliveon.net/api/v1/item?paper_id=61a754b4-fb18-4c25-9396-ea4ab5973c90
  */
 
 /**
@@ -493,11 +493,11 @@ HTTP/1.1 200 OK
  * @apiSuccessExample Success-Response:
 case : id Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/itemdetail/7efdcccd-577e-480c-9b54-71e74e7ecf06
+참고 : http://apidoc.weliveon.net/api/v1/itemdetail/7efdcccd-577e-480c-9b54-71e74e7ecf06
  *
 case : id not Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/itemdetail?item_id=82fbcc3b-63e1-4678-a227-7f57acb90de8
+참고 : http://apidoc.weliveon.net/api/v1/itemdetail?item_id=82fbcc3b-63e1-4678-a227-7f57acb90de8
  */
 
 /**
@@ -589,11 +589,11 @@ HTTP/1.1 200 OK
  * @apiSuccessExample Success-Response:
 case : id Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/paper/05bba2b4-d31e-46b4-8e45-13a6793d39fb
+참고 : http://apidoc.weliveon.net/api/v1/paper/05bba2b4-d31e-46b4-8e45-13a6793d39fb
  *
 case : id not Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/paper?classroom_id=64bb138b-e585-4f84-9a72-54ce3e8f30b3
+참고 : http://apidoc.weliveon.net/api/v1/paper?classroom_id=64bb138b-e585-4f84-9a72-54ce3e8f30b3
  */
 
 /**
@@ -731,7 +731,7 @@ HTTP/1.1 200 OK
  *
  * @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/paper?classroom_id=64bb138b-e585-4f84-9a72-54ce3e8f30b3
+참고 : http://apidoc.weliveon.net/api/v1/paper?classroom_id=64bb138b-e585-4f84-9a72-54ce3e8f30b3
 */
 
 
@@ -760,11 +760,11 @@ HTTP/1.1 200 OK
  * @apiSuccessExample Success-Response:
 case : id Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/qna/SySgp35J8
+참고 : http://apidoc.weliveon.net/api/v1/qna/SySgp35J8
  *
 case : id not Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/qna?paper_id=00dd5861-3ea0-461e-9d5d-cd8052704368&page=1&limit=12&order=favor
+참고 : http://apidoc.weliveon.net/api/v1/qna?paper_id=00dd5861-3ea0-461e-9d5d-cd8052704368&page=1&limit=12&order=favor
  */
 
 /**
@@ -848,11 +848,11 @@ HTTP/1.1 200 OK
  * @apiSuccessExample Success-Response:
 case : id Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/qnacomment/SJS5ohbJL
+참고 : http://apidoc.weliveon.net/api/v1/qnacomment/SJS5ohbJL
 *
 case : id not Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/qnacomment?qna_id=Hk5lG4Fam
+참고 : http://apidoc.weliveon.net/api/v1/qnacomment?qna_id=Hk5lG4Fam
  */
 
 /**
@@ -929,11 +929,11 @@ HTTP/1.1 200 OK
  * @apiSuccessExample Success-Response:
 case : id Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/qnalike/SyzKF0yCSr
+참고 : http://apidoc.weliveon.net/api/v1/qnalike/SyzKF0yCSr
  *
 case : id not Exist
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/qnalike?qna_id=rJvwRJ0HB
+참고 : http://apidoc.weliveon.net/api/v1/qnalike?qna_id=rJvwRJ0HB
  */
 
 /**
@@ -1012,7 +1012,7 @@ HTTP/1.1 200 OK
  *
  * @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK
-참고 : http://apidoc.weliveon.net:1337/api/v1/shorten/2605
+참고 : http://apidoc.weliveon.net/api/v1/shorten/2605
  */
 
 /**
