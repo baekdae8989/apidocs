@@ -3,6 +3,153 @@
  * @apiHeader {String} Authorization JWT
  */
 
+
+
+// Classroom 관련 API
+/**
+ * @api {get} api/v1/classroom/{id?}?username=?&order=?&limit=?&page=?&title=? 1. GET : Classroom Select
+ * @apiName ClassroomSelect
+ * @apiGroup Classroom
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription QueryParams의 id 값이 넘어오지 않을 경우만 QueryString -> username, order, limit, page 필수 조건 체크 함.
+ *
+ * @apiParam {String} [id]                  [QueryParams] id(primary key) / id가 넘어올 경우 특정 Classroom 리턴, 그렇지 않으면 Classroom list 리턴
+ * @apiParam {String} username              [QueryString] username
+ * @apiParam {String} order                 [QueryString] 'created_asc' || 'created_desc' || 'title_asc' || 'title_desc'  (넷중 다른 텍스트가 넘어올 경우 joi로 err처리)
+ * @apiParam {String} [limit]               [QueryString] 한 페이지에 보여질 Classroom 수
+ * @apiParam {String} [page]                [QueryString] 현재 페이지 수
+ * @apiParam {String} [title]               [QueryString] title 검색 조건 포함.
+ *
+ *
+ * @apiSuccessExample Success-Response:
+case : id Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/classroom/16771ba8-21f0-4560-a4d5-e9d887e535cd
+ *
+case : id not Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/classroom?username=baek_dae@naver.com&page=1&limit=10&order=created_desc
+ */
+
+/**
+ * @api {post} api/v1/classroom 2. POST : Classroom Insert
+ * @apiName ClassroomInsert
+ * @apiGroup Classroom
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String}   title                           [payload] title
+ * @apiParam {Date}     st_date                         [payload] 클래스룸 시작일 ( format / 'YYYY-MM-DD')
+ * @apiParam {Date}     ed_date                         [payload] 클래스룸 종료일 ( format / 'YYYY-MM-DD')
+ * @apiParam {String}   att_info                        [payload] 참여자 정보 리스트 ("{\"default_info\":\"닉네임\",\"dept\":true,\"dept_no\":true,\"email\":true,\"hp\":true,\"name\":true}")
+ * @apiParam {String}     logo                          [payload] 클래스룸 로고 ("{\"name\":\"BJyjSd3e.PNG\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/16771ba8-21f0-4560-a4d5-e9d887e535cd/hnmroOc6.PNG\"}")
+ * @apiParam {Boolean}     hasreport                    [payload] Report 생성 여부
+ * @apiParam {String}     owner_id_str                  [payload] 클래스룸 소유자
+ * @apiParam {String}     owner_group                   [payload] 클래스룸 소유자 그룹
+ * @apiParam {String}     welcome                       [payload] 클래스룸 환영 메시지
+ * @apiParam {String}     privacy_collect               [payload] 제3자 동의 여부(기업명)
+ * @apiParam {Number}     password                      [payload] 클래스룸 비밀번호 설정
+ *
+ *
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "id": "16771ba8-21f0-4560-a4d5-e9d887e535cd",
+    "title": "WELIVEON 2.0 TEST",
+    "st_date": "2020-03-05T00:00:00.000Z",
+    "ed_date": "2020-04-30T00:00:00.000Z",
+    "att_info": "{\"default_info\":\"닉네임\",\"dept\":true,\"dept_no\":true,\"email\":true,\"hp\":true,\"name\":true}",
+    "logo": "{\"name\":\"BJyjSd3e.PNG\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/16771ba8-21f0-4560-a4d5-e9d887e535cd/hnmroOc6.PNG\"}",
+    "hasreport": false,
+    "owner_id_str": "baek_dae@naver.com",
+    "owner_group": null,
+    "welcome": "위라이브온 테스트 클래스에 오신 여러분 환영",
+    "privacy_collect": "메가넥스트",
+    "password": "1234",
+    "createdAt": "2020-03-06T05:22:52.033Z",
+    "updatedAt": "2020-03-10T02:21:50.161Z"
+}
+ */
+
+/**
+ * @api {put} api/v1/classroom/{id} 3. PUT : Classroom Update
+ * @apiName ClassroomUpdate
+ * @apiGroup Classroom
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription payload의 값이 수정될 object
+ *
+ * @apiParam {String}   title                           [payload] title
+ * @apiParam {Date}     st_date                         [payload] 클래스룸 시작일 ( format / 'YYYY-MM-DD')
+ * @apiParam {Date}     ed_date                         [payload] 클래스룸 종료일 ( format / 'YYYY-MM-DD')
+ * @apiParam {String}   att_info                        [payload] 참여자 정보 리스트 ("{\"default_info\":\"닉네임\",\"dept\":true,\"dept_no\":true,\"email\":true,\"hp\":true,\"name\":true}")
+ * @apiParam {String}     logo                          [payload] 클래스룸 로고 ("{\"name\":\"BJyjSd3e.PNG\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/16771ba8-21f0-4560-a4d5-e9d887e535cd/hnmroOc6.PNG\"}")
+ * @apiParam {Boolean}     hasreport                    [payload] Report 생성 여부
+ * @apiParam {String}     owner_id_str                  [payload] 클래스룸 소유자
+ * @apiParam {String}     owner_group                   [payload] 클래스룸 소유자 그룹
+ * @apiParam {String}     welcome                       [payload] 클래스룸 환영 메시지
+ * @apiParam {String}     privacy_collect               [payload] 제3자 동의 여부(기업명)
+ * @apiParam {Number}     password                      [payload] 클래스룸 비밀번호 설정
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+/**
+ * @api {delete} api/v1/classroom/{id} 4. Delete : Classroom Delete
+ * @apiName ClassroomDelete
+ * @apiGroup Classroom
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 삭제할 classroom id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+/**
+ * @api {get} api/v1/classroom/copy/{id} 5. Get : Classroom Copy
+ * @apiName ClassroomCopy
+ * @apiGroup Classroom
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 복사할 classroom id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "id": "64bb138b-e585-4f84-9a72-54ce3e8f30b3",
+    "title": "WELIVEON 2.0 TEST_(복사본)",
+    "st_date": "2020-03-05T00:00:00.000Z",
+    "ed_date": "2020-04-30T00:00:00.000Z",
+    "att_info": "{\"default_info\":\"닉네임\",\"dept\":true,\"dept_no\":true,\"email\":true,\"hp\":true,\"name\":true}",
+    "logo": "{\"name\":\"BJyjSd3e.PNG\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/16771ba8-21f0-4560-a4d5-e9d887e535cd/hnmroOc6.PNG\"}",
+    "hasreport": false,
+    "owner_id_str": "baek_dae@naver.com",
+    "owner_group": null,
+    "welcome": "위라이브온 테스트 클래스에 오신 여러분 환영",
+    "privacy_collect": "메가넥스트",
+    "password": "1234",
+    "updatedAt": "2020-03-20T08:59:53.883Z",
+    "createdAt": "2020-03-20T08:59:53.883Z"
+}
+ */
+
+
+
+
+
+// Custom 관련 API
 /**
  * @api {get} api/v1/custom/home_userinfo/{username} GET HomeUserInfo
  * @apiName HomeUserInfo
@@ -13,7 +160,7 @@
  * @apiParam {String} username [QueryParams] username
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
+ HTTP/1.1 200 OK
  {
     "username": "baek_dae@naver.com",
     "grade": "A",
@@ -34,8 +181,8 @@
  * @apiParam {String} username [QueryParams] username
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- 참고 : http://apidoc.weliveon.net:1337/api/v1/custom/home_myclass?username=baek_dae@naver.com
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/custom/home_myclass?username=baek_dae@naver.com
  *
  */
 /**
@@ -48,8 +195,8 @@
  * @apiParam {String} username [QueryParams] username
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- 참고 : http://apidoc.weliveon.net:1337/api/v1/custom/home_myquizset?username=baek_dae@naver.com
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/custom/home_myquizset?username=baek_dae@naver.com
  *
  */
 /**
@@ -62,13 +209,16 @@
  * @apiParam {String} paper_id [QueryString] paper_id
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/custom/qna_shuffle/VyDeHHotW
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/custom/qna_shuffle/VyDeHHotW
  *
  */
 
 
 
+
+
+// File 관련 API
 /**
  * @api {get} api/v1/get_presigned_url/{dirName}/{fileName} 1. GET AWS S3 presigned URL
  * @apiName GetPreSignedUrl
@@ -80,8 +230,8 @@
  * @apiParam {String} fileName 고유한 fileName
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK (Expires : 180s)
- {
+HTTP/1.1 200 OK (Expires : 180s)
+{
     "preSignedUrl": "https://weliveon2.s3.ap-northeast-2.amazonaws.com/testdirectory/V63yDXQA.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIHN3TP6ABZROXLKA%2F20191101%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20191101T095638Z&X-Amz-Expires=180&X-Amz-Signature=4297ecc58f951f81ec606cd80b93550a18c7d4f61b8a2a17b35422ae64954f2c&X-Amz-SignedHeaders=host",
     "fileUrl": "https://weliveon2.s3.ap-northeast-2.amazonaws.com/testdirectory/V63yDXQA.png",
     "orig_fileName": "1.png"
@@ -98,7 +248,7 @@
  * @apiDescription 1번에서 생성된 preSignedUrl로 파일 Object를 포함하여 request 요청하면 업로드 OK
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
+HTTP/1.1 200 OK
  *
  */
 
@@ -112,8 +262,8 @@
  * @apiParam {String} fileName 고유한 fileName
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {count : 1}
+HTTP/1.1 200 OK
+{count : 1}
  *
  */
 
@@ -131,8 +281,8 @@
  * @apiParam {Object} file [payload] share file object
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {
+HTTP/1.1 200 OK
+{
     "name": "위라이브온매뉴얼.zip",
     "datas": [
             {
@@ -168,553 +318,9 @@
  */
 
 
-/**
- * @api {get} api/v1/classroom/{id?}?paper_id=?&order=?&limit=?&page=?&text=?&like_count=?&comment_count=? 1. GET : Qna Select
- * @apiName QnaSelect
- * @apiGroup Qna
- * @apiUse ApiHeaderAuthorization
- * @apiDescription QueryParams의 id 값이 넘어오지 않을 경우만 QueryString -> paper_id, order, limit, page 필수 조건 체크 함.
- *
- * @apiParam {String} [id]              [QueryParams] id(primary key) / id가 넘어올 경우 특정 Qna 리턴, 그렇지 않으면 Qna list 리턴
- * @apiParam {String} paper_id      [QueryString] paper_id
- * @apiParam {String} order             [QueryString] 'favor' || 'recently' (둘중 다른 텍스트가 넘어올 경우 joi로 err처리)
- * @apiParam {String} limit             [QueryString] 한 페이지에 보여질 Qna 수
- * @apiParam {String} page              [QueryString] 현재 페이지 수
- * @apiParam {String} [text]            [QueryString] text 검색 조건
- * @apiParam {String} [like_count]      [QueryString] like_count 이상 검색 조건
- * @apiParam {String} [comment_count]   [QueryString] comment_count 이상 검색 조건
- *
- *
- * @apiSuccessExample Success-Response:
- *     case : id Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/qna/VyogUToFZ
- *
- *     case : id not Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/qna?paper_id=VyDeHHotW&page=1&limit=12&order=favor
- */
-
-/**
- * @api {post} api/v1/qna 2. POST : Qna Insert
- * @apiName QnaInsert
- * @apiGroup Qna
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} writer                [payload] writer
- * @apiParam {String} text                  [payload] text
- * @apiParam {String} paper_id          [payload] 참고하는 qna 세션 id
- * @apiParam {Number} secret                [payload] null or 1 ( null = 공개, 1 = 익명)
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "id": "f151afc9-19c3-452b-9b5e-68eb76a30923",
-    "secret": 1,
-    "writer": "백대선",
-    "paper_id": "VyDeHHotW",
-    "text": "안녕하십니",
-    "updatedAt": "2019-11-01T09:03:11.615Z",
-    "createdAt": "2019-11-01T09:17:18.228Z"
- }
- */
-
-/**
- * @api {put} api/v1/qna/{id} 3. PUT : Qna Update
- * @apiName QnaUpdate
- * @apiGroup Qna
- * @apiUse ApiHeaderAuthorization
- * @apiDescription payload의 값이 수정될 object
- *
- * @apiParam {String} id                      [QueryParams] 변경할 qna id
- * @apiParam {String} [writer]                [payload] writer
- * @apiParam {String} [text]                  [payload] text
- * @apiParam {String} [paper_id]          [payload] 참고하는 qna 세션 id
- * @apiParam {Number} [secret]                [payload] null or 1 ( null = 공개, 1 = 익명)
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-/**
- * @api {delete} api/v1/qna/{id} 4. Delete : Qna Delete
- * @apiName QnaDelete
- * @apiGroup Qna
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} id                      [QueryParams] 삭제할 qna id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
 
 
-/**
- * @api {get} api/v1/qnacomment/{id?}?qna_id=? 1. GET : Qnacomment Select
- * @apiName QnacommentSelect
- * @apiGroup QnaComment
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} [id]              [QueryParams] id(primary key) / id가 넘어올 경우 특정 Qnacomment 리턴, 그렇지 않으면 Qnacomment list 리턴
- * @apiParam {String} qna_id            [QueryString] qna_id
- *
- *
- * @apiSuccessExample Success-Response:
- *     case : id Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/qnacomment/ByWYWjtnHH
- *
- *     case : id not Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/qnacomment?qna_id=B1KhTXFTQ
- */
-
-/**
- * @api {post} api/v1/qnacomment 2. POST : Qnacomment Insert
- * @apiName QnacommentInsert
- * @apiGroup QnaComment
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} writer                [payload] writer
- * @apiParam {String} text                  [payload] text
- * @apiParam {String} qna_id                [payload] 참고하는 qna_id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "id": "00119408-7c7e-4ea9-b43e-f3a765cceb67",
-    "writer": "백대선",
-    "qna_id": "VyDeHHotW",
-    "text": "안녕하십니",
-    "updatedAt": "2019-11-01T09:37:02.504Z",
-    "createdAt": "2019-11-01T09:37:02.504Z"
-}
- */
-
-/**
- * @api {put} api/v1/qnacomment/{id} 3. PUT : Qnacomment Update
- * @apiName QnacommentUpdate
- * @apiGroup QnaComment
- * @apiUse ApiHeaderAuthorization
- * @apiDescription payload의 값이 수정될 object
- *
- * @apiParam {String} id                      [QueryParams] 변경할 qnacomment id
- * @apiParam {String} [writer]                [payload] writer
- * @apiParam {String} [text]                  [payload] text
- * @apiParam {String} [qna_id]                [payload] 참고하는 qna 세션 id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-/**
- * @api {delete} api/v1/qnacomment/{id} 4. DELETE : Qnacomment Delete
- * @apiName QnacommentDelete
- * @apiGroup QnaComment
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} id                      [QueryParams] 삭제할 qnacomment id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-
-/**
- * @api {get} api/v1/qnalike/{id?}?qna_id=? 1. GET : Qnalike Select
- * @apiName QnalikeSelect
- * @apiGroup QnaLike
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} [id]              [QueryParams] id(primary key) / id가 넘어올 경우 특정 Qnalike 리턴, 그렇지 않으면 Qnalike list 리턴
- * @apiParam {String} qna_id            [QueryString] qna_id
- *
- *
- * @apiSuccessExample Success-Response:
- *     case : id Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/qnalike/j2yJdbhym
- *
- *     case : id not Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/qnalike?qna_id=heelwow
- */
-
-/**
- * @api {post} api/v1/qnalike 2. POST : Qnalike Insert
- * @apiName QnalikeInsert
- * @apiGroup QnaLike
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} writer                [payload] writer
- * @apiParam {String} qna_id                [payload] 참고하는 qna_id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "id": "aee682f1-ccbb-480f-80b9-29fee01e3c14",
-    "writer": "백대선",
-    "qna_id": "VyDeHHotW",
-    "updatedAt": "2019-11-01T09:44:58.788Z",
-    "createdAt": "2019-11-01T09:44:58.788Z"
-}
- */
-
-/**
- * @api {put} api/v1/qnalike/{id} 3. PUT : Qnalike Update
- * @apiName QnalikeUpdate
- * @apiGroup QnaLike
- * @apiUse ApiHeaderAuthorization
- * @apiDescription payload의 값이 수정될 object
- *
- * @apiParam {String} id                      [QueryParams] 변경할 qnalike id
- * @apiParam {String} [writer]                [payload] writer
- * @apiParam {String} [qna_id]                [payload] 참고하는 qna 세션 id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-/**
- * @api {delete} api/v1/qnalike/{id} 4. DELETE : Qnalike Delete
- * @apiName QnalikeDelete
- * @apiGroup QnaLike
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} id                      [QueryParams] 삭제할 qnalike id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-
-/**
- * @api {get} api/v1/classroom/{id?}?username=?&order=?&limit=?&page=?&title=? 1. GET : Classroom Select
- * @apiName ClassroomSelect
- * @apiGroup Classroom
- * @apiUse ApiHeaderAuthorization
- * @apiDescription QueryParams의 id 값이 넘어오지 않을 경우만 QueryString -> username, order, limit, page 필수 조건 체크 함.
- *
- * @apiParam {String} [id]              [QueryParams] id(primary key) / id가 넘어올 경우 특정 Classroom 리턴, 그렇지 않으면 Classroom list 리턴
- * @apiParam {String} username          [QueryString] username
- * @apiParam {String} order             [QueryString] 'created_asc' || 'created_desc' || 'title_asc' || 'title_desc'  (넷중 다른 텍스트가 넘어올 경우 joi로 err처리)
- * @apiParam {String} limit             [QueryString] 한 페이지에 보여질 Classroom 수
- * @apiParam {String} page              [QueryString] 현재 페이지 수
- * @apiParam {String} [title]           [QueryString] title 검색 조건
- *
- *
- * @apiSuccessExample Success-Response:
- *     case : id Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/classroom/ry112JaHS
- *
- *     case : id not Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/classroom?username=baek_dae@naver.com&page=1&limit=10&order=created_desc
- */
-
-/**
- * @api {post} api/v1/classroom 2. POST : Classroom Insert
- * @apiName ClassroomInsert
- * @apiGroup Classroom
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String}   title                   [payload] title
- * @apiParam {String}   gubun                   [payload] gubun
- * @apiParam {Date}     st_date                 [payload] 클래스룸 시작일 ( format / 'YYYY-MM-DD')
- * @apiParam {Date}     ed_date                 [payload] 클래스룸 종료일 ( format / 'YYYY-MM-DD')
- * @apiParam {String}   att_info                [payload] 참여자 정보 리스트 ( JSON.stringify : {"sosok":false,"nick":true,"name":false,"deptno":false,"hp":false,"email":false} )
- * @apiParam {String}     lbi                   [payload] Large Logo
- * @apiParam {String}     sbi                   [payload] Small Logo
- * @apiParam {String}     theme                     [payload] theme
- * @apiParam {Boolean}     hasqna                [payload] Q&A 사용 여부
- * @apiParam {Boolean}     hasquiz               [payload] Live Quiz 사용 여부
- * @apiParam {Boolean}     haspoll               [payload] Live Poll 사용 여부
- * @apiParam {Boolean}     hasshare               [payload] Live Share 사용 여부
- * @apiParam {Boolean}     hasspot              [payload] Live Spot 사용 여부
- * @apiParam {Boolean}     hassurvey               [payload] Survey 사용 여부
- * @apiParam {Boolean}     hasreport               [payload] Report 생성 여부
- * @apiParam {Number}     maxucnt               [payload] 클래스룸 최대 참여자 수
- * @apiParam {Number}     minucnt               [payload] 클래스룸 최소 참여자 수
- * @apiParam {String}     owner_id_str                     [payload] 클래스룸 소유자
- * @apiParam {String}     owner_group                     [payload] 클래스룸 소유자 그룹
- * @apiParam {String}     welcome                     [payload] 클래스룸 환영 메시지
- * @apiParam {String}     outertitle                     [payload] link title
- * @apiParam {String}     outerlink                     [payload] link url
- * @apiParam {Number}     totalusers                     [payload] 리포트 생성시 totalusers
- * @apiParam {Number}     initcount                     [payload] 초기화 횟수
- * @apiParam {String}     privacy_collect                     [payload] 제3자 동의 여부(기업)
- * @apiParam {Number}     password                     [payload] 클래스룸 비밀번호 설정
- *
- *
- *
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "id": "7afe325c-ce61-429e-a447-cc488ace05bf",
-    "title": "테스트 클래스룸",
-    "gubun": "A",
-    "st_date": "2019-11-01T00:00:00.000Z",
-    "ed_date": "2019-12-01T00:00:00.000Z",
-    "att_info": "{\"sosok\":false,\"nick\":true,\"name\":false,\"deptno\":false,\"hp\":false,\"email\":false}",
-    "theme": "A",
-    "owner_id_str": "baek_dae@naver.com",
-    "haspoll": true,
-    "hasqna": true,
-    "hasquiz": true,
-    "hassurvey": true,
-    "hasspot": true,
-    "hasshare": true,
-    "updatedAt": "2019-11-01T11:41:11.580Z",
-    "createdAt": "2019-11-01T11:41:11.580Z",
-    "lbi": null,
-    "sbi": null,
-    "maxucnt": null,
-    "minucnt": null,
-    "welcome": null,
-    "outertitle": null,
-    "outerlink": null,
-    "totalusers": 0,
-    "hasreport": false,
-    "initcount": 0,
-    "owner_group": null,
-    "privacy_collect": null,
-    "password": null
-}
- */
-
-/**
- * @api {put} api/v1/classroom/{id} 3. PUT : Classroom Update
- * @apiName ClassroomUpdate
- * @apiGroup Classroom
- * @apiUse ApiHeaderAuthorization
- * @apiDescription payload의 값이 수정될 object
- *
- * @apiParam {String} id                      [QueryParams] 변경할 classroom id
- * @apiParam {String}   title                   [payload] title
- * @apiParam {String}   gubun                   [payload] gubun
- * @apiParam {Date}     st_date                 [payload] 클래스룸 시작일 ( format / 'YYYY-MM-DD')
- * @apiParam {Date}     ed_date                 [payload] 클래스룸 종료일 ( format / 'YYYY-MM-DD')
- * @apiParam {String}   att_info                [payload] 참여자 정보 리스트 ( JSON.stringify : {"sosok":false,"nick":true,"name":false,"deptno":false,"hp":false,"email":false} )
- * @apiParam {String}     lbi                   [payload] Large Logo
- * @apiParam {String}     sbi                   [payload] Small Logo
- * @apiParam {String}     theme                     [payload] theme
- * @apiParam {Boolean}     hasqna                [payload] Q&A 사용 여부
- * @apiParam {Boolean}     hasquiz               [payload] Live Quiz 사용 여부
- * @apiParam {Boolean}     haspoll               [payload] Live Poll 사용 여부
- * @apiParam {Boolean}     hasshare               [payload] Live Share 사용 여부
- * @apiParam {Boolean}     hasspot              [payload] Live Spot 사용 여부
- * @apiParam {Boolean}     hassurvey               [payload] Survey 사용 여부
- * @apiParam {Boolean}     hasreport               [payload] Report 생성 여부
- * @apiParam {Number}     maxucnt               [payload] 클래스룸 최대 참여자 수
- * @apiParam {Number}     minucnt               [payload] 클래스룸 최소 참여자 수
- * @apiParam {String}     owner_id_str                     [payload] 클래스룸 소유자
- * @apiParam {String}     owner_group                     [payload] 클래스룸 소유자 그룹
- * @apiParam {String}     welcome                     [payload] 클래스룸 환영 메시지
- * @apiParam {String}     outertitle                     [payload] link title
- * @apiParam {String}     outerlink                     [payload] link url
- * @apiParam {Number}     totalusers                     [payload] 리포트 생성시 totalusers
- * @apiParam {Number}     initcount                     [payload] 초기화 횟수
- * @apiParam {String}     privacy_collect                     [payload] 제3자 동의 여부(기업)
- * @apiParam {Number}     password                     [payload] 클래스룸 비밀번호 설정
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-/**
- * @api {delete} api/v1/classroom/{id} 4. Delete : Classroom Delete
- * @apiName ClassroomDelete
- * @apiGroup Classroom
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} id                      [QueryParams] 삭제할 classroom id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-/**
- * @api {get} api/v1/classroom/copy/{id} 5. Get : Classroom Copy
- * @apiName ClassroomCopy
- * @apiGroup Classroom
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} id                      [QueryParams] 복사할 classroom id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "status": "success"
- }
- */
-
-
-/**
- * @api {get} api/v1/paper/{id?}?classroom_id=? 1. GET : Paper Select
- * @apiName PaperSelect
- * @apiGroup Paper
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} [id]                  [QueryParams] id(primary key) / id가 넘어올 경우 특정 Paper 리턴, 그렇지 않으면 Paper list 리턴
- * @apiParam {String} classroom_id           [QueryString] classroom_id
- * @apiParam {String} [flag]           [QueryString]
- *
- *
- * @apiSuccessExample Success-Response:
- *     case : id Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/paper/r1BRl4rkLS
- *
- *     case : id not Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/paper?classroom_id=rJfd7VB1UB
- */
-
-/**
- * @api {post} api/v1/paper 2. POST : Paper Insert
- * @apiName PaperInsert
- * @apiGroup Paper
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {Number} index                [payload] index
- * @apiParam {String} title                [payload] title
- * @apiParam {String} flag                [payload] flag
- * @apiParam {String} welcome                [payload] 참고하는 welcome
- * @apiParam {String} classroom_id                [payload] 참고하는 classroom_id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "id": "44fed1d8-27c5-49c7-a1c1-b1eae8aa8f4f",
-    "index": 1,
-    "title": "hello world",
-    "flag": "survey",
-    "welcome": "안녕하세여",
-    "classroom_id": "rJfd7VB1UB",
-    "updatedAt": "2019-11-01T11:55:31.496Z",
-    "createdAt": "2019-11-01T11:55:31.496Z"
-}
- */
-
-/**
- * @api {put} api/v1/paper/{id} 3. PUT : Paper Update
- * @apiName PaperUpdate
- * @apiGroup Paper
- * @apiUse ApiHeaderAuthorization
- * @apiDescription payload의 값이 수정될 object
- *
- *
- * @apiParam {String} id                      [QueryParams] 변경할 paper id
- * @apiParam {Number} index                [payload] index
- * @apiParam {String} title                [payload] title
- * @apiParam {String} flag                [payload] flag
- * @apiParam {String} welcome                [payload] 참고하는 welcome
- * @apiParam {String} classroom_id                [payload] 참고하는 classroom_id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-/**
- * @api {delete} api/v1/paper/{id} 4. DELETE : Paper Delete
- * @apiName PaperDelete
- * @apiGroup Paper
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} id                      [QueryParams] 삭제할 paper id
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "count": 1
- }
- */
-
-/**
- * @api {get} api/v1/paper/update_index/{classroom_id}/{current_id}/{current_index}/{change_index} 5. GET : Paper Update Index
- * @apiName PaperUpdateIndex
- * @apiGroup Paper
- * @apiUse ApiHeaderAuthorization
- * @apiDescription paper set 간 드래그&드롭으로 위치가 변경될 때 실행되는 api
- *
- * @apiParam {String} classroom_id                      [QueryParams] classroom_id
- * @apiParam {String} current_id                      [QueryParams] 현재 index의 id(primary key)
- * @apiParam {String} current_index                      [QueryParams] 현재 index
- * @apiParam {String} change_index                      [QueryParams] 변경될 index
- *
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "status": "success"
- }
- */
-
-/**
- * @api {get} api/v1/paper/{id} 6. GET : Paper Copy
- * @apiName PaperCopy
- * @apiGroup Paper
- * @apiUse ApiHeaderAuthorization
- *
- * @apiParam {String} id                      [QueryParams] 복사할 paper id
- *
- *
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "status": "success"
- }
- */
-
-
-
+// Item 관련 API
 /**
  * @api {get} api/v1/item/{id?}?paper_id=? 1. GET : Item Select
  * @apiName ItemSelect
@@ -723,16 +329,17 @@
  *
  * @apiParam {String} [id]                  [QueryParams] id(primary key) / id가 넘어올 경우 특정 Item 리턴, 그렇지 않으면 Item list 리턴
  * @apiParam {String} paper_id           [QueryString] paper_id
+ * @apiParam {String} [index]           [QueryString] index
  *
  *
  * @apiSuccessExample Success-Response:
- *     case : id Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/item/rykg2VNH1LS
+case : id Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/item/d6fc7fb3-95dc-4779-9636-76d6ccde3c35
  *
- *     case : id not Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/item?paper_id=H1znNNByIB
+case : id not Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/item?paper_id=61a754b4-fb18-4c25-9396-ea4ab5973c90
  */
 
 /**
@@ -742,10 +349,8 @@
  * @apiUse ApiHeaderAuthorization
  *
  * @apiParam {String} title                [payload] title
- * @apiParam {String} deco                [payload] deco
  * @apiParam {Number} timer                [payload] timer
- * @apiParam {String} status                [payload] status
- * @apiParam {Number} point                [payload] point
+ * @apiParam {String} mail_attachment                [payload] mail_attachment
  * @apiParam {Number} index                [payload] index
  * @apiParam {String} answer                [payload] answer
  * @apiParam {String} jimun_multi                [payload] jimun_multi
@@ -756,23 +361,21 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "id": "48b78229-c105-4c28-953c-614c37159724",
-    "title": "1번문제",
-    "deco": "Q",
-    "timer": 10,
-    "status": "null",
-    "point": 1,
-    "index": 1,
-    "answer": "null",
-    "jimun_multi": "null",
-    "paper_id": "H1znNNByIB",
+HTTP/1.1 200 OK
+{
+    "id": "d6fc7fb3-95dc-4779-9636-76d6ccde3c35",
+    "title": "1번 HR ON X wanted 8-1의 연사가 아닌 사람은 누구인가요?",
+    "timer": null,
+    "mail_attachment": null,
+    "index": 2,
+    "answer": "[\"8895f154-54c9-4467-afc9-f681bf1a2a5a\"]",
+    "jimun_multi": "[{\"name\":\"스크린샷 2020-01-15 오후 3.11.10.png\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/77a31cb3-5f02-43e8-9b69-6cfeb25c94fb/lKJVLslY.png\",\"type\":\"image\"},{\"name\":\"file_example_MP3_700KB.mp3\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/77a31cb3-5f02-43e8-9b69-6cfeb25c94fb/syEk2VDfR.mp3\",\"type\":\"audio\"},{\"name\":\"https://www.youtube.com/watch?v=trI-NsoiBqg&list=RDtrI-NsoiBqg&start_radio=1\",\"type\":\"youtube\",\"url\":\"https://www.youtube.com/watch?v=trI-NsoiBqg&list=RDtrI-NsoiBqg&start_radio=1\"},{\"name\":\"file_example_MP4_640_3MG.mp4\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/77a31cb3-5f02-43e8-9b69-6cfeb25c94fb/vW2moiUN3.mp4\",\"type\":\"video\"}]",
+    "paper_id": "61a754b4-fb18-4c25-9396-ea4ab5973c90",
     "answer_flag": "A",
     "required": true,
-    "score": true,
-    "updatedAt": "2019-11-01T12:11:41.460Z",
-    "createdAt": "2019-11-01T12:11:41.460Z"
+    "score": false,
+    "createdAt": "2020-03-20T08:59:54.371Z",
+    "updatedAt": "2020-03-20T08:59:54.371Z"
 }
  */
 
@@ -786,10 +389,8 @@
  *
  * @apiParam {String} id                      [QueryParams] 변경할 item id
  * @apiParam {String} title                [payload] title
- * @apiParam {String} deco                [payload] deco
  * @apiParam {Number} timer                [payload] timer
- * @apiParam {String} status                [payload] status
- * @apiParam {Number} point                [payload] point
+ * @apiParam {String} mail_attachment                [payload] mail_attachment
  * @apiParam {Number} index                [payload] index
  * @apiParam {String} answer                [payload] answer
  * @apiParam {String} jimun_multi                [payload] jimun_multi
@@ -800,10 +401,10 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
+HTTP/1.1 200 OK
+{
     "count": 1
- }
+}
  */
 
 /**
@@ -816,10 +417,10 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
+HTTP/1.1 200 OK
+{
     "count": 1
- }
+}
  */
 
 /**
@@ -837,10 +438,10 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
+HTTP/1.1 200 OK
+{
     "status": "success"
- }
+}
  */
 
 /**
@@ -857,13 +458,28 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
-    "status": "success"
- }
+HTTP/1.1 200 OK
+{
+    "id": "a3b188d6-1130-4eff-b053-53f5f1051087",
+    "title": "1번 HR ON X wanted 8-1의 연사가 아닌 사람은 누구인가요?_(복사본)",
+    "timer": null,
+    "mail_attachment": null,
+    "index": 3,
+    "answer": "[\"7e004b4a-ab9b-409e-bdb5-7ed4b730ae93\"]",
+    "jimun_multi": "[{\"name\":\"스크린샷 2020-01-15 오후 3.11.10.png\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/77a31cb3-5f02-43e8-9b69-6cfeb25c94fb/lKJVLslY.png\",\"type\":\"image\"},{\"name\":\"file_example_MP3_700KB.mp3\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/77a31cb3-5f02-43e8-9b69-6cfeb25c94fb/syEk2VDfR.mp3\",\"type\":\"audio\"},{\"name\":\"https://www.youtube.com/watch?v=trI-NsoiBqg&list=RDtrI-NsoiBqg&start_radio=1\",\"type\":\"youtube\",\"url\":\"https://www.youtube.com/watch?v=trI-NsoiBqg&list=RDtrI-NsoiBqg&start_radio=1\"},{\"name\":\"file_example_MP4_640_3MG.mp4\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/77a31cb3-5f02-43e8-9b69-6cfeb25c94fb/vW2moiUN3.mp4\",\"type\":\"video\"}]",
+    "paper_id": "61a754b4-fb18-4c25-9396-ea4ab5973c90",
+    "answer_flag": "A",
+    "required": true,
+    "score": false
+}
  */
 
 
+
+
+
+
+// Itemdetail 관련 API
 /**
  * @api {get} api/v1/itemdetail/{id?}?item_id=? 1. GET : Itemdetail Select
  * @apiName ItemdetailSelect
@@ -875,13 +491,13 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     case : id Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/itemdetail/r1YZn4VSJUS
+case : id Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/itemdetail/7efdcccd-577e-480c-9b54-71e74e7ecf06
  *
- *     case : id not Exist
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/itemdetail?item_id=rykg2VNH1LS
+case : id not Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/itemdetail?item_id=82fbcc3b-63e1-4678-a227-7f57acb90de8
  */
 
 /**
@@ -894,18 +510,21 @@
  * @apiParam {Number} index                [payload] index
  * @apiParam {String} item_id                [payload] 참고하는 item_id
  * @apiParam {Number} point                [payload] 문항별 리커트 점수
- * @apiParam {String} image                [payload] 이미지 문항인 경우  ex) {"type":"image","target":"https://weliveon2.s3.ap-northeast-2.amazonaws.com/S4VGehNE/1.png"}
+ * @apiParam {String} bogitype                [payload] text || image
+ * @apiParam {String} image                [payload] bogitype image인 경우  ex) {"type":"image","target":"https://weliveon2.s3.ap-northeast-2.amazonaws.com/S4VGehNE/
+ * 1.png"}
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
+HTTP/1.1 200 OK
+{
     "id": "d25cc0a4-6347-4891-9810-37e59ca00702",
     "image": "{\"type\":\"image\",\"target\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/S4VGehNE/1.png\"}",
     "title": "hello",
     "index": 1,
     "item_id": "rykg2VNH1LS",
     "point": 3,
+    "bogitype": "image",
     "updatedAt": "2019-11-06T01:56:09.964Z",
     "createdAt": "2019-11-06T01:56:09.964Z"
 }
@@ -924,13 +543,15 @@
  * @apiParam {Number} index                [payload] index
  * @apiParam {String} item_id                [payload] 참고하는 item_id
  * @apiParam {Number} point                [payload] 문항별 리커트 점수
+* @apiParam {String} bogitype                [payload] text || image
+ * @apiParam {String} image                [payload] bogitype image인 경우  ex) {"type":"image","target":"https://weliveon2.s3.ap-northeast-2.amazonaws.com/S4VGehNE/
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
+HTTP/1.1 200 OK
+{
     "count": 1
- }
+}
  */
 
 /**
@@ -943,11 +564,418 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+
+
+
+
+// Paper 관련 API
+/**
+ * @api {get} api/v1/paper/{id?}?classroom_id=? 1. GET : Paper Select
+ * @apiName PaperSelect
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} [id]                      [QueryParams] id(primary key) / id가 넘어올 경우 특정 Paper 리턴, 그렇지 않으면 Paper list 리턴
+ * @apiParam {String} classroom_id              [QueryString] classroom_id
+ * @apiParam {String} [flag]                    [QueryString] flag
+ *
+ *
+ * @apiSuccessExample Success-Response:
+case : id Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/paper/05bba2b4-d31e-46b4-8e45-13a6793d39fb
+ *
+case : id not Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/paper?classroom_id=64bb138b-e585-4f84-9a72-54ce3e8f30b3
+ */
+
+/**
+ * @api {post} api/v1/paper 2. POST : Paper Insert
+ * @apiName PaperInsert
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {Number} index                [payload] index
+ * @apiParam {String} title                [payload] title
+ * @apiParam {String} flag                [payload] flag ( quiz || poll || qna || share || spot || timetable )
+ * @apiParam {String} subflag                [payload] subflag ( quiz일 경우 live || survival ||non_live ) ( poll 일 경우 live || survey )
+ * @apiParam {String} welcome_text                [payload] poll > survey 일 경우 환영 메시지
+ * @apiParam {String} welcome_image                [payload] poll > survey 일 경우 환영 이미지
+ * @apiParam {String} timetable_date                [payload] timetable 일 경우 시간 값.
+ * @apiParam {String} classroom_id                [payload] 참고하는 classroom_id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "id": "05bba2b4-d31e-46b4-8e45-13a6793d39fb",
+    "index": 9,
+    "title": "만족도 조사 (Survey)",
+    "classroom_id": "64bb138b-e585-4f84-9a72-54ce3e8f30b3",
+    "flag": "poll",
+    "subflag": "survey",
+    "welcome_text": "본 설문조사는 여러분들이 본 과정에 참가하면서 어떤 생각이나 느낌을 가지고 있는지 파악하여 향후 효과적인 교육과정을 설계하는데 필요한 자료를 확보하기 위한 것입니다. 각 설문에 대해 느낀 점을 솔직하게 응답해 주시기 바랍니다.",
+    "welcome_image": "{\"name\":\"94ea115a9b5f1e9e5eeb37d2a628f16a.jpg\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/9e23e460-40cf-4742-b3c6-1fcb898a1c8d/2W6KQ8Ce.jpg\"}",
+    "timetable_date": null,
+    "createdAt": "2020-03-20T08:59:53.901Z",
+    "updatedAt": "2020-03-20T08:59:53.901Z"
+}
+ */
+
+/**
+ * @api {put} api/v1/paper/{id} 3. PUT : Paper Update
+ * @apiName PaperUpdate
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription payload의 값이 수정될 object
+ *
+ *
+ * @apiParam {String} id                      [QueryParams] 변경할 paper id
+ * @apiParam {Number} index                [payload] index
+ * @apiParam {String} title                [payload] title
+ * @apiParam {String} flag                [payload] flag ( quiz || poll || qna || share || spot || timetable )
+ * @apiParam {String} subflag                [payload] subflag ( quiz일 경우 live || survival ||non_live ) ( poll 일 경우 live || survey )
+ * @apiParam {String} welcome_text                [payload] poll > survey 일 경우 환영 메시지
+ * @apiParam {String} welcome_image                [payload] poll > survey 일 경우 환영 이미지
+ * @apiParam {String} timetable_date                [payload] timetable 일 경우 시간 값.
+ * @apiParam {String} classroom_id                [payload] 참고하는 classroom_id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+/**
+ * @api {delete} api/v1/paper/{id} 4. DELETE : Paper Delete
+ * @apiName PaperDelete
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 삭제할 paper id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+/**
+ * @api {get} api/v1/paper/update_index/{classroom_id}/{current_id}/{current_index}/{change_index} 5. GET : Paper Update Index
+ * @apiName PaperUpdateIndex
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription paper set 간 드래그&드롭으로 위치가 변경될 때 실행되는 api
+ *
+ * @apiParam {String} classroom_id                      [QueryParams] classroom_id
+ * @apiParam {String} current_id                      [QueryParams] 현재 index의 id(primary key)
+ * @apiParam {String} current_index                      [QueryParams] 현재 index
+ * @apiParam {String} change_index                      [QueryParams] 변경될 index
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "status": "success"
+}
+ */
+
+/**
+ * @api {get} api/v1/paper/copy/{id} 6. GET : Paper Copy
+ * @apiName PaperCopy
+ * @apiGroup Paper
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 복사할 paper id
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "id": "05bba2b4-d31e-46b4-8e45-13a6793d39fb",
+    "index": 9,
+    "title": "만족도 조사 (Survey)",
+    "classroom_id": "64bb138b-e585-4f84-9a72-54ce3e8f30b3",
+    "flag": "poll",
+    "subflag": "survey",
+    "welcome_text": "본 설문조사는 여러분들이 본 과정에 참가하면서 어떤 생각이나 느낌을 가지고 있는지 파악하여 향후 효과적인 교육과정을 설계하는데 필요한 자료를 확보하기 위한 것입니다. 각 설문에 대해 느낀 점을 솔직하게 응답해 주시기 바랍니다.",
+    "welcome_image": "{\"name\":\"94ea115a9b5f1e9e5eeb37d2a628f16a.jpg\",\"url\":\"https://weliveon2.s3.ap-northeast-2.amazonaws.com/9e23e460-40cf-4742-b3c6-1fcb898a1c8d/2W6KQ8Ce.jpg\"}",
+    "timetable_date": null,
+    "createdAt": "2020-03-20T08:59:53.901Z",
+    "updatedAt": "2020-03-20T08:59:53.901Z"
+}
+ */
+
+
+
+
+
+
+// Qna 관련 API
+/**
+ * @api {get} api/v1/qna/{id?}?paper_id=?&order=?&limit=?&page=?&text=?&like_count=?&comment_count=? 1. GET : Qna Select
+ * @apiName QnaSelect
+ * @apiGroup Qna
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription QueryParams의 id 값이 넘어오지 않을 경우만 QueryString -> paper_id, order, limit, page 필수 조건 체크 함.
+ *
+ * @apiParam {String} [id]              [QueryParams] id(primary key) / id가 넘어올 경우 특정 Qna 리턴, 그렇지 않으면 Qna list 리턴
+ * @apiParam {String} paper_id      [QueryString] paper_id
+ * @apiParam {String} order             [QueryString] 'favor' || 'recently' (둘중 다른 텍스트가 넘어올 경우 joi로 err처리)
+ * @apiParam {String} limit             [QueryString] 한 페이지에 보여질 Qna 수
+ * @apiParam {String} page              [QueryString] 현재 페이지 수
+ * @apiParam {String} [text]            [QueryString] text 검색 조건
+ * @apiParam {String} [like_count]      [QueryString] like_count 이상 검색 조건
+ * @apiParam {String} [comment_count]   [QueryString] comment_count 이상 검색 조건
+ *
+ *
+ * @apiSuccessExample Success-Response:
+case : id Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/qna/SySgp35J8
+ *
+case : id not Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/qna?paper_id=00dd5861-3ea0-461e-9d5d-cd8052704368&page=1&limit=12&order=favor
+ */
+
+/**
+ * @api {post} api/v1/qna 2. POST : Qna Insert
+ * @apiName QnaInsert
+ * @apiGroup Qna
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} writer                [payload] writer
+ * @apiParam {String} text                  [payload] text
+ * @apiParam {String} paper_id          [payload] 참고하는 qna 세션 id
+ * @apiParam {Number} secret                [payload] 0 or 1 ( 0 = 공개, 1 = 익명)
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "id": "SySgp35J8",
+    "writer": "메가스터디컴퓨터 박민정",
+    "text": "2020년에는 메가스터디컴퓨터아카데미에\n학생들이 넘쳐났으면 좋겠습니다!!!!",
+    "secret": 0,
+    "paper_id": "00dd5861-3ea0-461e-9d5d-cd8052704368",
+    "createdAt": "2020-01-02T00:44:29.183Z",
+    "updatedAt": "2020-01-02T00:44:29.183Z",
+    "Qnalikes": [],
+    "Qnacomments": []
+}
+ */
+
+/**
+ * @api {put} api/v1/qna/{id} 3. PUT : Qna Update
+ * @apiName QnaUpdate
+ * @apiGroup Qna
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription payload의 값이 수정될 object
+ *
+ * @apiParam {String} id                      [QueryParams] 변경할 qna id
+ * @apiParam {String} [writer]                [payload] writer
+ * @apiParam {String} [text]                  [payload] text
+ * @apiParam {String} [paper_id]          [payload] 참고하는 qna 세션 id
+ * @apiParam {Number} [secret]                [payload] null or 1 ( null = 공개, 1 = 익명)
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+/**
+ * @api {delete} api/v1/qna/{id} 4. Delete : Qna Delete
+ * @apiName QnaDelete
+ * @apiGroup Qna
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 삭제할 qna id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+
+/**
+ * @api {get} api/v1/qnacomment/{id?}?qna_id=? 1. GET : Qnacomment Select
+ * @apiName QnacommentSelect
+ * @apiGroup QnaComment
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} [id]              [QueryParams] id(primary key) / id가 넘어올 경우 특정 Qnacomment 리턴, 그렇지 않으면 Qnacomment list 리턴
+ * @apiParam {String} qna_id            [QueryString] qna_id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+case : id Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/qnacomment/SJS5ohbJL
+*
+case : id not Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/qnacomment?qna_id=Hk5lG4Fam
+ */
+
+/**
+ * @api {post} api/v1/qnacomment 2. POST : Qnacomment Insert
+ * @apiName QnacommentInsert
+ * @apiGroup QnaComment
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} writer                [payload] writer
+ * @apiParam {String} text                  [payload] text
+ * @apiParam {String} qna_id                [payload] 참고하는 qna_id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "id": "SJS5ohbJL",
+    "writer": "양주메가스터디학원 이상미",
+    "text": "2020년 건강과 꿈, 목표가 꼭 이루어지길...",
+    "qna_id": "ByG7w2WkI",
+    "createdAt": "2019-12-26T04:48:13.108Z",
+    "updatedAt": "2019-12-26T04:48:13.108Z"
+}
+ */
+
+/**
+ * @api {put} api/v1/qnacomment/{id} 3. PUT : Qnacomment Update
+ * @apiName QnacommentUpdate
+ * @apiGroup QnaComment
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription payload의 값이 수정될 object
+ *
+ * @apiParam {String} id                      [QueryParams] 변경할 qnacomment id
+ * @apiParam {String} [writer]                [payload] writer
+ * @apiParam {String} [text]                  [payload] text
+ * @apiParam {String} [qna_id]                [payload] 참고하는 qna 세션 id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
  {
     "count": 1
  }
  */
+
+/**
+ * @api {delete} api/v1/qnacomment/{id} 4. DELETE : Qnacomment Delete
+ * @apiName QnacommentDelete
+ * @apiGroup QnaComment
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 삭제할 qnacomment id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+ {
+    "count": 1
+ }
+ */
+
+
+/**
+ * @api {get} api/v1/qnalike/{id?}?qna_id=? 1. GET : Qnalike Select
+ * @apiName QnalikeSelect
+ * @apiGroup QnaLike
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} [id]              [QueryParams] id(primary key) / id가 넘어올 경우 특정 Qnalike 리턴, 그렇지 않으면 Qnalike list 리턴
+ * @apiParam {String} qna_id            [QueryString] qna_id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+case : id Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/qnalike/SyzKF0yCSr
+ *
+case : id not Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/qnalike?qna_id=rJvwRJ0HB
+ */
+
+/**
+ * @api {post} api/v1/qnalike 2. POST : Qnalike Insert
+ * @apiName QnalikeInsert
+ * @apiGroup QnaLike
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} writer                [payload] writer
+ * @apiParam {String} qna_id                [payload] 참고하는 qna_id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "id": "SyzKF0yCSr",
+    "writer": "배영찬",
+    "qna_id": "rJvwRJ0HB",
+    "createdAt": "2019-09-05T02:10:09.413Z",
+    "updatedAt": "2019-09-05T02:10:09.413Z"
+}
+ */
+
+/**
+ * @api {put} api/v1/qnalike/{id} 3. PUT : Qnalike Update
+ * @apiName QnalikeUpdate
+ * @apiGroup QnaLike
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription payload의 값이 수정될 object
+ *
+ * @apiParam {String} id                      [QueryParams] 변경할 qnalike id
+ * @apiParam {String} [writer]                [payload] writer
+ * @apiParam {String} [qna_id]                [payload] 참고하는 qna 세션 id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+/**
+ * @api {delete} api/v1/qnalike/{id} 4. DELETE : Qnalike Delete
+ * @apiName QnalikeDelete
+ * @apiGroup QnaLike
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 삭제할 qnalike id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+
+
+
 
 
 
@@ -964,23 +992,23 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     참고 : http://apidoc.weliveon.net:1337/api/v1/shorten/1300
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/shorten/2605
  */
 
 /**
  * @api {post} api/v1/shorten 2. POST : Shorten Insert
  * @apiName ShortenInsert
  * @apiGroup Shorten
- * @apiUse ApiHeaderAuthorization
+ * @apiUse ApiHeaderAuthorizatio
  *
  * @apiParam {String} long_url                [payload] long_url
  * @apiParam {String} short_url                [payload] short_url
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
+HTTP/1.1 200 OK
+{
     "id": 2585,
     "long_url": "http://weliveon.net/u/main/start/16abda6e-5e48-4327-b15d-bbbd3bae9b92",
     "short_url": "16abda6e-5e48-4327-b15d-bbbd3bae9b92",
@@ -1002,10 +1030,10 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
+HTTP/1.1 200 OK
+{
     "count": 1
- }
+}
  */
 
 /**
@@ -1018,8 +1046,8 @@
  *
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- {
+HTTP/1.1 200 OK
+{
     "count": 1
- }
+}
  */
