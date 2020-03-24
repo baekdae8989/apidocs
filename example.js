@@ -720,7 +720,7 @@ HTTP/1.1 200 OK
  */
 
 /**
- * @api {get} api/v1/paper/join/{classroom_id} 6. GET : Paper > Item > Itemdetail join
+ * @api {get} api/v1/paper/join/{classroom_id} 7. GET : Paper > Item > Itemdetail join
  * @apiName PaperJoin
  * @apiGroup Paper
  * @apiUse ApiHeaderAuthorization
