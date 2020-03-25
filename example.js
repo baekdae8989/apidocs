@@ -1070,3 +1070,95 @@ HTTP/1.1 200 OK
     "count": 1
 }
  */
+
+
+
+
+
+// Requestdata 관련 API
+/**
+ * @api {get} api/v1/requestdata/{id?}?classroom_id=?&paper_id?=? 1. GET : Requestdata Select
+ * @apiName RequestdataSelect
+ * @apiGroup Requestdata
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} [id]                [QueryParams] id(primary key) / id가 넘어올 경우 특정 Item 리턴, 그렇지 않으면 Requestdata list 리턴
+ * @apiParam {String} classroom_id           [QueryString] classroom_id
+ * @apiParam {String} [paper_id]           [QueryString] paper_id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+case : id Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/requestdata/1561
+ *
+case : id not Exist
+HTTP/1.1 200 OK
+참고 : http://apidoc.weliveon.net:1337/api/v1/requestdata?classroom_id=16771ba8-21f0-4560-a4d5-e9d887e535cd
+ */
+
+/**
+ * @api {post} api/v1/requestdata 2. POST : Requestdata Insert
+ * @apiName RequestdataInsert
+ * @apiGroup Requestdata
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} email                [payload] email
+ * @apiParam {String} classroom_id                [payload] classroom_id
+ * @apiParam {String} paper_id                [payload] paper_id
+ * @apiParam {String} nick                [payload] nick
+ * @apiParam {String} status                [payload] status
+ *
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "id": 1562,
+    "email": "sdfds@undefined",
+    "classroom_id": "16771ba8-21f0-4560-a4d5-e9d887e535cd",
+    "paper_id": "a4a81fd7-2ea6-4d11-a966-3bf7539060c0",
+    "default_info": "Hello",
+    "status": "Y",
+    "createdAt": "2020-03-16T04:36:39.784Z",
+    "updatedAt": "2020-03-16T04:36:39.784Z"
+}
+ */
+
+/**
+ * @api {put} api/v1/requestdata/{id} 3. PUT : Requestdata Update
+ * @apiName RequestdataUpdate
+ * @apiGroup Requestdata
+ * @apiUse ApiHeaderAuthorization
+ * @apiDescription payload의 값이 수정될 object
+ *
+ * @apiParam {String} id                [QueryParams] 변경할 requestdata id
+ * @apiParam {String} [email]                [payload] email
+ * @apiParam {String} [classroom_id]                [payload] classroom_id
+ * @apiParam {String} [paper_id]                [payload] paper_id
+ * @apiParam {String} [nick]                [payload] nick
+ * @apiParam {String} [status]                [payload] status
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
+
+/**
+ * @api {delete} api/v1/requestdata/{id} 4. DELETE : Requestdata Delete
+ * @apiName RequestdataDelete
+ * @apiGroup Requestdata
+ * @apiUse ApiHeaderAuthorization
+ *
+ * @apiParam {String} id                      [QueryParams] 삭제할 requestdata id
+ *
+ *
+ * @apiSuccessExample Success-Response:
+HTTP/1.1 200 OK
+{
+    "count": 1
+}
+ */
