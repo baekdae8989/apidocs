@@ -1106,7 +1106,7 @@ HTTP/1.1 200 OK
  * @apiParam {String} email                [payload] email
  * @apiParam {String} classroom_id                [payload] classroom_id
  * @apiParam {String} paper_id                [payload] paper_id
- * @apiParam {String} nick                [payload] nick
+ * @apiParam {String} default_info                [payload] default_info
  * @apiParam {String} status                [payload] status
  *
  *
@@ -1136,7 +1136,7 @@ HTTP/1.1 200 OK
  * @apiParam {String} [email]                [payload] email
  * @apiParam {String} [classroom_id]                [payload] classroom_id
  * @apiParam {String} [paper_id]                [payload] paper_id
- * @apiParam {String} [nick]                [payload] nick
+ * @apiParam {String} [default_info]                [payload] default_info
  * @apiParam {String} [status]                [payload] status
  *
  *
